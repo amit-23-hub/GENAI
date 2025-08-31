@@ -1,0 +1,8 @@
+services:
+  vector_db:
+    image: qdrant/qdrant:latest
+    container_name: vector_db
+    ports:
+      - "6333:6333"
+      
+ 

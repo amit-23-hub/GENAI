@@ -4,6 +4,7 @@ from dotenv import load_dotenv
 client = OpenAI()
 import json
 import requests 
+import os
 
 
 load_dotenv() 
@@ -17,9 +18,13 @@ def get_current_weather(location: str) -> str:
     else:
         return "Sorry, I couldn't fetch the weather data at the moment."
 
+def run_command(cmd : str) : 
+    result = os.system(cmd)
+    return result
 
 avaialble_tools = {
     "get_current_weather" : get_current_weather
+    , "run_command" : run_command
  }
    
 
@@ -60,6 +65,7 @@ output format :
     -> " write_code" : to write code for a given problem statement
     -> " debug_code" : to debug the given code
     -> " explain_code" : to explain the given code
+    -> " run_command" : to run a command on your local machine
 
 
 example :input : what is the current weather in new york city and also tell me the latest news in new york city ?
@@ -82,6 +88,7 @@ messages = [
     {"role" : "system" ,"content" :system_prompt},
 ]
 
+# in this we insert the user input and keep on appending the response to messages so that the model can have the context of previous conversation will run infinitely 
 while True :
     # usrr se input 
  query = input("Enter your question : ")
