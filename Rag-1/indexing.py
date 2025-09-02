@@ -5,6 +5,8 @@ from openai import OpenAI
 from dotenv import load_dotenv
 client = OpenAI()
 from langchain.embeddings import OpenAIEmbeddings
+from langchain_qudrant import QdrantVectorStore
+
 
 
 pdf_path = Path(__file__).parent / "nodejs.pdf"
@@ -27,7 +29,14 @@ texts = text_splitter.split_documents(docs)
 embeddings = OpenAIEmbeddings(model="text-embedding-3-small")      # using openAI embedding model
 
 
-vector_store = 
+vector_store = QdrantVectorStore.from_documents(
+    texts,
+    embeddings,
+    collection_name="learnig_vector_store",
+    url="http://localhost:6333",  # Qdrant URL
+
+)
+
 
 
 
