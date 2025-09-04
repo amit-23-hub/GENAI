@@ -55,5 +55,7 @@ async def process_query(query: str):
     
     # save to  db
     print(f" {query}" , response.choices[0].message.content)
+
+    
     
     
